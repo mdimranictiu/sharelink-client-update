@@ -30,7 +30,7 @@ document.title="Register"
               timer: 1500,
             });
             reset();
-            navigate("/dashboard");
+            navigate("/");
             console.log("login success")
           })
           .catch((error) => console.error(error));
@@ -42,7 +42,7 @@ document.title="Register"
 
   const handleGoogleSignIn = () => {
     signInWithGoogle()
-      .then(() => navigate("/dashboard"))
+      .then(() => navigate("/"))
       .catch((error) => {
         Swal.fire({ icon: "error", title: "Error", text: error.message });
       });

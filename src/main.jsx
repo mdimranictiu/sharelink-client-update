@@ -12,15 +12,16 @@ import Register from './pages/Register';
 import Home from './pages/Home';
 import AuthProvider from './AuthContext/AuthProvider';
 import Contact from './pages/Contact';
+import AddLink from './pages/AddLink';
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Root />, // Root layout component
+    element: <Root />, 
     errorElement: <div>Hello world!</div>,
     children: [
       {
-        index: true, // This makes it the default route for "/"
+        index: true, 
         element: <Home />,
       },
       {
@@ -36,15 +37,9 @@ const router = createBrowserRouter([
         element: <Contact></Contact>
       },
       {
-        path: "/dashboard",
-        element: <Home/>, // Dashboard Layout Component
-        children: [
-          {
-            path: "add-link", // No need for '/' in child routes
-            element: <Home />,
-          },
-        ],
-      },
+        path: '/add-link',
+        element: <AddLink></AddLink>,
+      }
     ],
   },
 ]);
