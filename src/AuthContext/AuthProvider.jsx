@@ -41,7 +41,7 @@ const AuthProvider = ({children}) => {
         const unSubscribe= onAuthStateChanged(auth,currentUser=>{
             if(currentUser){
                 const userInfo= {email: currentUser?.email};
-                axiosPublic.post('/users',{email: currentUser?.email,userName:currentUser?.displayName,userID: uuidv4(),
+                axiosPublic.post('/users',{email: currentUser?.email,userName:currentUser?.displayName,
                     createdAt: new Date().toISOString() })
                 .then((res)=>{
                     if(res.data.insertedId){

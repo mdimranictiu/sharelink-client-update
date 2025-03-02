@@ -1,12 +1,13 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef,useContext } from "react";
 import { Link } from "react-router-dom";
 import { IoIosMenu } from "react-icons/io";
 import { IoClose } from "react-icons/io5";
+import { AuthContext } from "../AuthContext/AuthProvider";
 
 
 const NavBar = () => {
- const user=true;
-  const [menuOpen, setMenuOpen] = useState(false);
+const { user, logOut } = useContext(AuthContext);
+   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef(null);
 
   useEffect(() => {
@@ -19,11 +20,11 @@ const NavBar = () => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // const handleSignOut = () => {
-  //   logOut()
-  //     .then(() => console.log("Sign out successfully"))
-  //     .catch((error) => console.log(error));
-  // };
+  const handleSignOut = () => {
+    logOut()
+      .then(() => console.log("Sign out successfully"))
+      .catch((error) => console.log(error));
+  };
 
   const links = (
     <>
@@ -65,7 +66,7 @@ const NavBar = () => {
         <div className="flex items-center gap-4">
 
           {user ? (
-            <button  className="px-4 py-2 max-sm:hidden bg-red-500 text-white rounded hover:bg-red-600 transition">
+            <button onClick={handleSignOut}  className="px-4 py-2 max-sm:hidden bg-red-500 text-white rounded hover:bg-red-600 transition">
               Log out
             </button>
           ) : (
@@ -99,7 +100,7 @@ const NavBar = () => {
         {/* Auth Section (Mobile Only) */}
         <div className="px-2">
           {user ? (
-            <button className="w-full px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition">
+            <button onClick={handleSignOut} className="w-full px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition">
               Log out
             </button>
           ) : (
