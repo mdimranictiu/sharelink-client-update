@@ -13,6 +13,10 @@ import Home from './pages/Home';
 import AuthProvider from './AuthContext/AuthProvider';
 import Contact from './pages/Contact';
 import AddLink from './pages/AddLink';
+import VerifyPage from './pages/VerifyPage';
+import MyLinks from './pages/MyLinks';
+import PrivateRoute from './hooks/PrivateRoute';
+
 
 const router = createBrowserRouter([
   {
@@ -22,7 +26,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true, 
-        element: <Home />,
+        element: <Login></Login>,
       },
       {
         path: "/login",
@@ -38,7 +42,15 @@ const router = createBrowserRouter([
       },
       {
         path: '/add-link',
-        element: <AddLink></AddLink>,
+        element: <PrivateRoute><AddLink></AddLink></PrivateRoute>,
+      }
+      ,{
+        path: "/link/:uniqueId" ,
+        element: <VerifyPage/>
+      }
+      ,{
+        path: '/my-links',
+        element: <PrivateRoute><MyLinks></MyLinks></PrivateRoute>
       }
     ],
   },

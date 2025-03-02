@@ -69,6 +69,7 @@ const AddLink = () => {
       fileURL: fileurl,
       access: access,
       expirationDate: expirationDate,
+      views: 0
     };
     console.log(generateData);
     axiosSecure
@@ -171,7 +172,7 @@ const AddLink = () => {
                       type="submit"
                       className="px-6 py-2 bg-green-500 text-white font-semibold rounded-lg shadow hover:bg-green-600 transition"
                     >
-                      Generate Share Link
+                      {fetch? "Generating..." : shareLink ? "Generated" : "Generate Share Link"}
                     </button>
                   </div>
                 </div>
@@ -193,7 +194,14 @@ const AddLink = () => {
                   color: "#2A8AA4",
                 }}
               >
-                {shareLink}
+                   <a
+                        href={shareLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-500 underline"
+                      >
+                        {shareLink}
+                      </a>
               </span>
             </div>
           )}

@@ -40,7 +40,7 @@ const { user, logOut } = useContext(AuthContext);
       {user && (
         <>
           <li onClick={() => setMenuOpen(false)}>
-            <Link to="/my-link">My Links</Link>
+            <Link to="/my-links">My Links</Link>
           </li>
           <li className={!user?"hidden":"block"} onClick={() => setMenuOpen(false)}>
         <Link to="/contact-us">Contact Us</Link>
