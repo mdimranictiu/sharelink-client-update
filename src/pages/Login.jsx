@@ -5,7 +5,6 @@ import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import { AuthContext } from "../AuthContext/AuthProvider";
 
-
 const Login = () => {
   const { signInUser, signInWithGoogle } = useContext(AuthContext);
   const {
@@ -14,7 +13,7 @@ const Login = () => {
     formState: { errors },
     reset,
   } = useForm();
-  
+
   const navigate = useNavigate();
 
   const onSubmit = (data) => {
@@ -22,8 +21,8 @@ const Login = () => {
     signInUser(email, password)
       .then(() => {
         reset();
-        navigate("/");
-        console.log("login success")
+        navigate("/add-link");
+        console.log("login success");
       })
       .catch((error) => {
         Swal.fire({
@@ -38,8 +37,8 @@ const Login = () => {
   const handleGoogleSignIn = () => {
     signInWithGoogle()
       .then(() => {
-        navigate("/");
-        console.log("login success")
+        navigate("/add-link");
+        console.log("login success");
       })
       .catch((error) => {
         Swal.fire({
@@ -62,7 +61,7 @@ const Login = () => {
         </div>
 
         {/* Login Form  */}
-        <form className="mt-4"  onSubmit={handleSubmit(onSubmit)}>
+        <form className="mt-4" onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-4">
             <label className="block text-gray-600 font-semibold mb-1">
               Email
@@ -71,7 +70,7 @@ const Login = () => {
               type="email"
               {...register("email", { required: "Email is required" })}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2A8AA4] focus:outline-none"
-              placeholder="Enter your email" 
+              placeholder="Enter your email"
             />
             {errors.email && (
               <p className="text-red-500 text-sm">{errors.email.message}</p>
@@ -83,7 +82,7 @@ const Login = () => {
               Password
             </label>
             <input
-              type="password" 
+              type="password"
               {...register("password", {
                 required: "Password is required",
                 minLength: {

@@ -29,21 +29,21 @@ const { user, logOut } = useContext(AuthContext);
   const links = (
     <>
       <li onClick={() => setMenuOpen(false)}>
-        <Link to="/">Home</Link>
+        <Link className="hover:text-white" to="/">Home</Link>
       </li>
       <li onClick={() => setMenuOpen(false)}>
-            <Link to="/add-link">Add Link</Link>
+            <Link className="hover:text-white" to="/add-link">Add Link</Link>
           </li>
           <li className={user?"hidden":"block"} onClick={() => setMenuOpen(false)}>
-        <Link to="/contact-us">Contact Us</Link>
+        <Link className="hover:text-white" to="/contact-us">Contact Us</Link>
       </li>
       {user && (
         <>
           <li onClick={() => setMenuOpen(false)}>
-            <Link to="/my-links">My Links</Link>
+            <Link className="hover:text-white" to="/my-links">My Links</Link>
           </li>
           <li className={!user?"hidden":"block"} onClick={() => setMenuOpen(false)}>
-        <Link to="/contact-us">Contact Us</Link>
+        <Link className="hover:text-white" to="/contact-us">Contact Us</Link>
       </li>
         </>
       )}

@@ -11,9 +11,19 @@ const MyLinks = () => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [currentUpdate, setCurrentUpdate] = useState(null);
-  const [fetch,refetch]=useState(false)
-
-  const { register, handleSubmit, setValue, formState: { errors } } = useForm(); // Initialize react-hook-form
+  const [fetch, refetch] = useState(false);
+ useEffect(()=>{
+  setTimeout(() => {
+    setError('');
+    setSuccess('')
+  }, 2000);
+ },[error,success])
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+  } = useForm(); // Initialize react-hook-form
 
   useEffect(() => {
     setLoading(true);
@@ -27,7 +37,7 @@ const MyLinks = () => {
         setError(error.message || "Failed to fetch links");
         setLoading(false);
       });
-  }, [axiosSecure,fetch]);
+  }, [axiosSecure, fetch]);
 
   const handleUpdate = (id) => {
     const linkToEdit = links.find((link) => link._id === id);
@@ -55,19 +65,22 @@ const MyLinks = () => {
       access: data.access,
       linkId: currentUpdate?._id,
     };
-   refetch(true)
+    refetch(true);
     axiosSecure
       .patch("/update-link", updateInfo)
       .then(() => {
         setSuccess("Update Successful");
         setLoading(false);
-        refetch(false)
+        refetch(false);
         document.getElementById("my_modal_5").close();
       })
       .catch((error) => {
-        setError("Error: " + (error.response?.data?.message || error.message || "Unknown error"));
+        setError(
+          "Error: " +
+            (error.response?.data?.message || error.message || "Unknown error")
+        );
         setLoading(false);
-        refetch(false)
+        refetch(false);
       });
   };
 
@@ -86,18 +99,17 @@ const MyLinks = () => {
 
           {loading ? (
             <>
-            <div className="flex items-center justify-center min-h-screen">
-            <span className="loading loading-ring loading-lg text-primary"></span>
-            <span className="loading loading-ring loading-lg text-secondary"></span>
-            <span className="loading loading-ring loading-lg text-accent"></span>
-            <span className="loading loading-ring loading-lg text-neutral"></span>
-            <span className="loading loading-ring loading-lg text-info"></span>
-            <span className="loading loading-ring loading-lg text-success"></span>
-            <span className="loading loading-ring loading-lg text-warning"></span>
-            <span className="loading loading-ring loading-lg text-error"></span>
-          </div>
-        </>
-  
+              <div className="flex items-center justify-center min-h-screen">
+                <span className="loading loading-ring loading-lg text-primary"></span>
+                <span className="loading loading-ring loading-lg text-secondary"></span>
+                <span className="loading loading-ring loading-lg text-accent"></span>
+                <span className="loading loading-ring loading-lg text-neutral"></span>
+                <span className="loading loading-ring loading-lg text-info"></span>
+                <span className="loading loading-ring loading-lg text-success"></span>
+                <span className="loading loading-ring loading-lg text-warning"></span>
+                <span className="loading loading-ring loading-lg text-error"></span>
+              </div>
+            </>
           ) : error ? (
             <p className="text-center text-red-500">{error}</p>
           ) : links.length === 0 ? (
@@ -105,7 +117,10 @@ const MyLinks = () => {
           ) : (
             <div className="grid grid-cols-3 max-md:grid-cols-2 max-sm:grid-cols-1 gap-5 px-10">
               {links.map((link) => (
-                <div key={link._id} className="card card-border shadow-2xl w-96 mb-4">
+                <div
+                  key={link._id}
+                  className="card card-border shadow-2xl w-96 mb-4"
+                >
                   <div className="card-body">
                     <h2 className="card-title">Access: {link?.access}</h2>
                     <p>
@@ -120,7 +135,10 @@ const MyLinks = () => {
                       </a>
                     </p>
                     <p>
-                      Expire Date: <span className="text-red-500">{link?.expirationDate}</span>
+                      Expire Date:{" "}
+                      <span className="text-red-500">
+                        {link?.expirationDate}
+                      </span>
                     </p>
                     <p>Views: {link?.views || "0"}</p>
                     <div className="card-actions">
@@ -143,17 +161,15 @@ const MyLinks = () => {
             </div>
           )}
 
-          {success && (
-            <div className="text-center text-green-500 mt-4">
-              {success}
-            </div>
-          )}
+
         </div>
       </div>
 
       <dialog id="my_modal_5" className="modal modal-middle">
         <div className="modal-box">
-          <h3 className="font-bold text-center text-lg">Update Accessibility</h3>
+          <h3 className="font-bold text-center text-lg">
+            Update Accessibility
+          </h3>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="mb-4">
               <label className="block text-gray-600 font-semibold mb-2">
@@ -167,19 +183,22 @@ const MyLinks = () => {
                 <option value="private">Private</option>
               </select>
               {errors.access && (
-                <span className="text-red-500 text-sm">{errors.access.message}</span>
+                <span className="text-red-500 text-sm">
+                  {errors.access.message}
+                </span>
               )}
             </div>
             <div className="mt-20">
-              <button type="submit" className="btn w-[60%] bg-[#2A8AA4] mx-[20%]">
+              <button
+                type="submit"
+                className="btn w-[60%] bg-[#2A8AA4] mx-[20%]"
+              >
                 Update
               </button>
             </div>
           </form>
           {error && (
-            <div className="text-center text-red-500 mt-4">
-              {error}
-            </div>
+            <div className="text-center text-red-500 mt-4">{error}</div>
           )}
           <div className="mt-5">
             <button

@@ -4,7 +4,8 @@ import { useContext } from "react";
 import { AuthContext } from "../AuthContext/AuthProvider";
 
 const axiosSecure = axios.create({
-  baseURL: 'http://localhost:3000/',
+  // baseURL: 'https://sharelink-server.vercel.app/',
+  baseURL: 'http://localhost:3000/'
 });
 
 const UseAxiosSecure = () => {
